@@ -8,9 +8,9 @@ def github_login
     'provider'  => 'github',
     'uid'       => '12345',
     'token'     => 'adoifvuhadiuvh2341234',
-    'info'      => {email:      'example@go.com',
-                    nickname:   'ego',
-                    image_url:  'poijasf98u98u'}
+    'info'      => {'email'     =>   'example@go.com',
+                    'nickname'  =>   'ego',
+                    'image_url' =>   'poijasf98u98u'}
   }
 end
 
@@ -26,16 +26,4 @@ RSpec.configure do |config|
 
   config.filter_run :focus
   config.run_all_when_everything_filtered = true
-  config.example_status_persistence_file_path = "spec/examples.txt"
-  config.disable_monkey_patching!
-
-  if config.files_to_run.one?
-    config.default_formatter = 'doc'
-  end
-
-  config.profile_examples = 10
-
-  config.order = :random
-
-  Kernel.srand config.seed
 end
