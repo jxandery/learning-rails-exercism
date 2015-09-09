@@ -1,13 +1,15 @@
-require 'spec_helper'
+require 'rails_helper'
 
 RSpec.describe 'User logs in with github', type: :feature do
 
-  before :each do
-    Capybara.app = OauthWorkshop::Application
-  end
+  context 'sees their followers' do
+    it 'logs in' do
+      visit root_path
+      github_login
+      click_link('Login with Github')
 
-  it 'logging in' do
-    visit root_path
-    expect(page.status_code).to eq(200)
+      expect(page).to have_content('Welcome ego')
+      expect(current_path).to eq(dashboard_path)
+    end
   end
 end
