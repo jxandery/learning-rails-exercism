@@ -15,6 +15,7 @@ gem 'rails_12factor'
 gem 'omniauth-github', '~> 1.1.2'
 
 group :development, :test do
+  gem 'capybara'
   gem 'rspec-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
