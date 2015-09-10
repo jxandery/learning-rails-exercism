@@ -52,4 +52,12 @@ RSpec.describe 'gitservice works' do
       expect(results.last[:login]).to eq('turingschool')
     end
   end
+
+  it 'gets last year of commit activity' do
+    VCR.use_cassette('github_service#commit_activity') do
+      service = GithubService.new
+      results = service.orgs('jxandery')
+
+    end
+  end
 end
