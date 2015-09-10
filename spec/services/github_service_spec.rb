@@ -52,4 +52,12 @@ RSpec.describe 'gitservice works' do
       expect(results.last[:login]).to eq('turingschool')
     end
   end
+
+  it 'gets contributions data' do
+    VCR.use_cassette('github_service#orgs') do
+      stats = Stats.new('jxandery')
+
+      expect(stats.max_streak).to eq(20)
+    end
+  end
 end
