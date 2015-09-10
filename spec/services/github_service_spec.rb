@@ -8,8 +8,8 @@ RSpec.describe 'gitservice works' do
       results = service.repos('jxandery')
 
       expect(results.count).to eq(30)
-      expect(results.last['id']).to eq(34675310)
-      expect(results.last['name']).to eq('dinner_dash')
+      expect(results.last[:id]).to eq(34675310)
+      expect(results.last[:name]).to eq('dinner_dash')
     end
   end
 
@@ -19,7 +19,7 @@ RSpec.describe 'gitservice works' do
       results = service.followers('jxandery')
 
       expect(results.count).to eq(9)
-      expect(results.first['login']).to eq('mirjoy')
+      expect(results.first[:login]).to eq('mirjoy')
     end
   end
 end
