@@ -7,6 +7,8 @@ require 'capybara/rspec'
 require 'capybara/rails'
 require 'webmock/rspec'
 require 'vcr'
+require 'githubstats'
+
 
 WebMock.disable_net_connect!(allow_localhost: true)
 

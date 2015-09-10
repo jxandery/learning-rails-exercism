@@ -37,8 +37,11 @@
   <% end %>
 
 <!-- number of user's starred repos -->
-<h2>Number of Starred Repos: </h2>
-<%= @github_service.starred(current_user.nickname).count %>
+<h2>Number of Starred Repos:  <%= @github_service.starred(current_user.nickname).count %></h2>
+
+<!-- user's longest streak-->
+<h2>Contributions:</h2>
+<h3>Longest Streak:  <%= @stats.max_streak %></h3>
 
 
 <!-- nav -->
