@@ -1,21 +1,30 @@
 <div class="container-fluid container-home">
 <div class="col-md-2"></div>
 <div class="col-md-8">
+
 <!-- user -->
   <h1 class="home">Welcome <%= current_user.nickname %>! You Are Authorized</h1>
   <%= image_tag current_user.image_url, class: "img-circle img-thumbnail home-image" %>
   <h2 class="home"> <%= current_user.nickname %></h2>
   <h2 class="home"> <%= current_user.email %></h2>
   <%= link_to "Logout", logout_path, method: :delete, class: "btn btn-lg btn-default btn-home" %>
+
 <!-- user's repos -->
 <h2>Repos</h2>
   <% @github_service.repos(current_user.nickname).each do |repo| %>
     <%= repo[:name] %><br>
   <% end %>
+
 <!-- user's followers -->
 <h2>Followers</h2>
   <% @github_service.followers(current_user.nickname).each do |follower| %>
     <%= follower[:login] %><br>
+  <% end %>
+
+<!-- user's following -->
+<h2>Following</h2>
+  <% @github_service.following(current_user.nickname).each do |f| %>
+    <%= f[:login] %><br>
   <% end %>
 </div>
 <div class="col-md-2"></div>

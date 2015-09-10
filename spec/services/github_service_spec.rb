@@ -22,4 +22,14 @@ RSpec.describe 'gitservice works' do
       expect(results.first[:login]).to eq('mirjoy')
     end
   end
+
+  it 'gets all following' do
+    VCR.use_cassette('github_service#following') do
+      service = GithubService.new
+      results = service.following('jxandery')
+
+      expect(results.count).to eq(19)
+      expect(results.first[:login]).to eq('jcasimir')
+    end
+  end
 end
