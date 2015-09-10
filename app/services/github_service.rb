@@ -27,6 +27,22 @@ class GithubService
     parse(connection.get("/users/#{user}/orgs?client_id=#{key}&client_secret=#{secret}"))
   end
 
+  def commit_activity(user)
+    #total = []
+    #repo_names = []
+    #repos(user).each do |repo|
+      #repo_names << repo[:name]
+    #end
+    #repo_names.each do |repo_name|
+      #activity = parse(connection.get("/repos/#{user}/#{repo_name}/stats/commit_activity?client_id=#{key}&client_secret=#{secret}"))
+      #activity.each do |act|
+        #total << act[:total]
+      #end
+    #end
+      #total.sum
+    #/repos/:owner/:repo/stats/commit_activity
+  end
+
   private
 
   def parse(response)
