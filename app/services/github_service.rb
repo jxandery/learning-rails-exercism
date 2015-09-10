@@ -7,10 +7,16 @@ class GithubService
   end
 
   def repos(user)
-    JSON.parse(connection.get("/users/#{user}/repos").body, symbolize_names: true)
+    parse(connection.get("/users/#{user}/repos"))
   end
 
   def followers(user)
-    JSON.parse(connection.get("/users/#{user}/followers").body, symbolize_names: true)
+    parse(connection.get("/users/#{user}/followers"))
+  end
+
+  private
+
+  def parse(response)
+    JSON.parse(response.body, symbolize_names: true)
   end
 end
