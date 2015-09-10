@@ -5,10 +5,27 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
+  <style>
+    .container{
+      width: 80%;
+    }
+    .temp-col, .col-md-12, .col-md-11, .col-md-10, .col-md-9{
+      border: 1px solid #000;
+    }
+  </style>
 </head>
 <body>
+<div class="container">
+  <%= yield %>
+</div>
 
-<%= yield %>
+<div >
+  <h1>components</h1>
+  <button type="button" name="button" class="btn-green">Test Button</button>
+
+</div>
+
 
 </body>
 </html>
