@@ -1,6 +1,6 @@
 require 'githubstats'
 
-class Stats
+class StatsService
   attr_reader :stats
 
   def initialize(user)
