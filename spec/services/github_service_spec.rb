@@ -3,7 +3,6 @@ require 'spec_helper'
 RSpec.describe 'gitservice works' do
 
   it 'gets all repos' do
-
     VCR.use_cassette('github_service#repos') do
       service = GithubService.new
       results = service.repos('jxandery')
@@ -12,6 +11,15 @@ RSpec.describe 'gitservice works' do
       expect(results.last['id']).to eq(34675310)
       expect(results.last['name']).to eq('dinner_dash')
     end
+  end
 
+  it 'gets all followers' do
+    VCR.use_cassette('github_service#followers') do
+      service = GithubService.new
+      results = service.followers('jxandery')
+
+      expect(results.count).to eq(9)
+      expect(results.first['login']).to eq('mirjoy')
+    end
   end
 end
