@@ -3,6 +3,6 @@ class DashboardController < ApplicationController
 
   def show
     @github_service = GithubService.new
-    @stats = Stats.new(current_user.nickname)
+    @stats = StatsService.new(current_user.nickname)
   end
 end

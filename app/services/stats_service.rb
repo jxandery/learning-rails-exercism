@@ -10,4 +10,8 @@ class Stats
   def max_streak
     stats.longest_streak.count
   end
+
+  def current_streak
+    stats.data.today
+  end
 end
