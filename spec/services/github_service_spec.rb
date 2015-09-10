@@ -32,4 +32,14 @@ RSpec.describe 'gitservice works' do
       expect(results.first[:login]).to eq('jcasimir')
     end
   end
+
+  it 'gets number of starred repos' do
+    VCR.use_cassette('github_service#starred') do
+      service = GithubService.new
+      results = service.starred('jxandery')
+
+      expect(results.count).to eq(2)
+      expect(results.first[:owner][:login]).to eq('turingschool')
+    end
+  end
 end

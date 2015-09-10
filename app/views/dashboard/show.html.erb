@@ -30,6 +30,9 @@
 <div class="col-md-2"></div>
 </div>
 
+<!-- number of user's starred repos -->
+<h2>Number of Starred Repos: </h2>
+<%= @github_service.starred(current_user.nickname).count %>
 
 
 <!-- nav -->

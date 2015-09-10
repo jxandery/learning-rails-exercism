@@ -18,6 +18,10 @@ class GithubService
     parse(connection.get("/users/#{user}/following"))
   end
 
+  def starred(user)
+    parse(connection.get("/users/#{user}/starred"))
+  end
+
   private
 
   def parse(response)
