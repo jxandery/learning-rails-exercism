@@ -6,7 +6,11 @@ class GithubService
     #connection['apikey'] = ENV['github_key']
   end
 
-  def repos(name)
-    JSON.parse(connection.get("/users/#{name}/repos").body, symbolize_names: true)
+  def repos(user)
+    JSON.parse(connection.get("/users/#{user}/repos").body, symbolize_names: true)
+  end
+
+  def followers(user)
+    JSON.parse(connection.get("/users/#{user}/followers").body, symbolize_names: true)
   end
 end
