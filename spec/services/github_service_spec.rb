@@ -42,4 +42,14 @@ RSpec.describe 'gitservice works' do
       expect(results.first[:owner][:login]).to eq('turingschool')
     end
   end
+
+  it 'gets list of organizations user belongs to' do
+    VCR.use_cassette('github_service#orgs') do
+      service = GithubService.new
+      results = service.orgs('jcasimir')
+
+      expect(results.count).to eq(3)
+      expect(results.last[:login]).to eq('turingschool')
+    end
+  end
 end

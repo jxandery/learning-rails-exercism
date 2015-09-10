@@ -22,6 +22,10 @@ class GithubService
     parse(connection.get("/users/#{user}/starred"))
   end
 
+  def orgs(user)
+    parse(connection.get("/users/#{user}/orgs"))
+  end
+
   private
 
   def parse(response)

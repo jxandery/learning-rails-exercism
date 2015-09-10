@@ -30,6 +30,12 @@
 <div class="col-md-2"></div>
 </div>
 
+<!-- user's following -->
+<h2>Organizations</h2>
+  <% @github_service.orgs(current_user.nickname).each do |f| %>
+    <%= f[:login] %><br>
+  <% end %>
+
 <!-- number of user's starred repos -->
 <h2>Number of Starred Repos: </h2>
 <%= @github_service.starred(current_user.nickname).count %>
