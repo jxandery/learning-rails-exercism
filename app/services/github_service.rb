@@ -2,6 +2,7 @@ class GithubService
   attr_reader :connection
 
   def initialize
-    @connection = Hurley.client.new(url: "http://localhost:3000/v1")
+    @connection = Hurley::Client.new "https://api.github.com"
+    #connection['apikey'] = ENV['github_key']
   end
 end
