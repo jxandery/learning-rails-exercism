@@ -7,6 +7,6 @@ class GithubService
   end
 
   def repos(name)
-    JSON.parse(connection.get("/users/#{name}/repos").body)
+    JSON.parse(connection.get("/users/#{name}/repos").body, symbolize_names: true)
   end
 end
