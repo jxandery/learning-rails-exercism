@@ -15,21 +15,6 @@
   <% end %>
 </div>
 
-<!-- user's following -->
-<h2>Organizations</h2>
-<% @github_service.orgs(current_user.nickname).each do |f| %>
-  <%= f[:login] %><br>
-<% end %>
-
-<!-- number of user's starred repos -->
-<h2>Number of Starred Repos:  <%= @github_service.starred(current_user.nickname).count %></h2>
-
-<!-- user's current, longest streak, total contributions -->
-<h2>Contributions:</h2>
-<h3>Longest Streak: <%= @stats.max_streak %>  </h3>
-<h3>Current Streak: <%= @stats.current_streak %> </h3>
-<h3>Contributions last year: <%= @stats.commit_activity %></h3>
-
 <!-- user's feed -->
 <h2>Feed:</h2>
 <% @github_service.events(current_user.nickname).first(3).each do |event| %>
@@ -82,22 +67,32 @@
   <!-- COLUMN 2 -->
   <div class="col-md-4 temp-col"><!-- col 2 -->
 
+
+<!-- user's current, longest streak, total contributions -->
     <div class="row"><!-- col2: row 1 miscellaneous -->
       <p>Miscellaneous</p>
       <div class="col-lg-4">
         <div class="bs-component">
           <ul class="list-group">
             <li class="list-group-item">
-              <span class="badge">14</span>
-              Cras justo odio
+              <span class="badge"><%= @github_service.starred(current_user.nickname).count %></span>
+             Starred Repos
             </li>
             <li class="list-group-item">
-              <span class="badge">2</span>
-              Dapibus ac facilisis in
+              <span class="badge"><%= @stats.current_streak %></span>
+              Current Streak
             </li>
             <li class="list-group-item">
-              <span class="badge">1</span>
-              Morbi leo risus
+              <span class="badge"><%= @stats.max_streak %></span>
+              Longest Streak
+            </li>
+            <li class="list-group-item">
+              <span class="badge"><%= @stats.commit_activity %></span>
+             Contributions last year
+            </li>
+            <li class="list-group-item">
+              <span class="badge"><% @github_service.orgs(current_user.nickname).count %></span>
+             Organizations
             </li>
           </ul>
           <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div></div>
