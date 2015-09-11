@@ -43,7 +43,21 @@
 <h2>Contributions:</h2>
 <h3>Longest Streak: <!--  <%#= @stats.max_streak %> --> </h3>
 <h3>Current Streak: <!--  <%#= @stats.current_streak %> --> </h3>
-<h3>Contributions last year: <%= @github_service.commit_activity(current_user.nickname).first[:commits_url] %></h3>
+<h3>Contributions last year: <%#= @github_service.commit_activity(current_user.nickname).first[:commits_url] %></h3>
+
+  <!-- user's feed -->
+<h2>Feed:</h2>
+  <% @github_service.events(current_user.nickname).first.each do |event| %>
+    <%= event[:message] %><br>
+  <% end %>
+
+  <% @github_service.events(current_user.nickname).second.each do |event| %>
+    <%= event[:message] %><br>
+  <% end %>
+
+  <% @github_service.events(current_user.nickname).third.each do |event| %>
+    <%= event[:message] %><br>
+  <% end %>
 
 <!-- nav -->
 <div class="row">
@@ -53,11 +67,9 @@
 </div>
 
 <div class="row">
-  <!-- feed -->
   <div class="col-md-8 temp-col">
     <p>feed</p>
   </div>
-
 
   <!-- repos -->
   <div class="col-md-4 temp-col">

@@ -27,6 +27,17 @@ class GithubService
     parse(connection.get("/users/#{user}/orgs?client_id=#{key}&client_secret=#{secret}"))
   end
 
+  def events(user)
+    events = parse(connection.get("/users/#{user}/events/public?client_id=#{key}&client_secret=#{secret}"))
+    commits = []
+    events.map do |event|
+      if event[:type] == "PushEvent"
+        commits << event[:payload][:commits]
+      end
+    end
+    commits
+  end
+
   def commit_activity(user)
     #total = []
     #repo_names = []
