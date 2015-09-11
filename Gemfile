@@ -13,7 +13,7 @@ gem 'figaro'
 gem 'hurley'
 gem 'rails_12factor'
 gem 'omniauth-github', '~> 1.1.2'
-gem 'githubstats', '~> 0.2.6'
+gem 'githubstats', '~> 1.1.0'
 
 group :development, :test do
   gem 'capybara'

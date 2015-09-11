@@ -12,6 +12,6 @@ class StatsService
   end
 
   def current_streak
-    stats.data.today
+    stats.streak.count
   end
 end
