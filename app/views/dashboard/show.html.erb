@@ -2,27 +2,27 @@
 <div class="col-md-2"></div>
 <div class="col-md-8">
 
-<!-- user -->
+  <!-- user -->
   <h1 class="home">Welcome <%= current_user.nickname %>! You Are Authorized</h1>
   <%= image_tag current_user.image_url, class: "img-circle img-thumbnail home-image" %>
   <h2 class="home"> <%= current_user.nickname %></h2>
   <h2 class="home"> <%= current_user.email %></h2>
   <%= link_to "Logout", logout_path, method: :delete, class: "btn btn-lg btn-default btn-home" %>
 
-<!-- user's repos -->
-<h2>Repos</h2>
+  <!-- user's repos -->
+  <h2>Repos</h2>
   <% @github_service.repos(current_user.nickname).each do |repo| %>
     <%= repo[:name] %><br>
   <% end %>
 
-<!-- user's followers -->
-<h2>Followers</h2>
+  <!-- user's followers -->
+  <h2>Followers</h2>
   <% @github_service.followers(current_user.nickname).each do |follower| %>
     <%= follower[:login] %><br>
   <% end %>
 
-<!-- user's following -->
-<h2>Following</h2>
+  <!-- user's following -->
+  <h2>Following</h2>
   <% @github_service.following(current_user.nickname).each do |f| %>
     <%= f[:login] %><br>
   <% end %>
@@ -32,9 +32,9 @@
 
 <!-- user's following -->
 <h2>Organizations</h2>
-  <% @github_service.orgs(current_user.nickname).each do |f| %>
-    <%= f[:login] %><br>
-  <% end %>
+<% @github_service.orgs(current_user.nickname).each do |f| %>
+  <%= f[:login] %><br>
+<% end %>
 
 <!-- number of user's starred repos -->
 <h2>Number of Starred Repos:  <%= @github_service.starred(current_user.nickname).count %></h2>
@@ -45,19 +45,24 @@
 <h3>Current Streak: <!--  <%#= @stats.current_streak %> --> </h3>
 <h3>Contributions last year: <%#= @github_service.commit_activity(current_user.nickname).first[:commits_url] %></h3>
 
-  <!-- user's feed -->
+<!-- user's feed -->
 <h2>Feed:</h2>
-  <% @github_service.events(current_user.nickname).first.each do |event| %>
-    <%= event[:message] %><br>
-  <% end %>
+<% @github_service.events(current_user.nickname).first(3).each do |event| %>
+  <% event.each do |commit| %><br>
+    <%= commit[:message] %><br>
+  <% end %><br>
+<% end %>
 
-  <% @github_service.events(current_user.nickname).second.each do |event| %>
-    <%= event[:message] %><br>
-  <% end %>
-
-  <% @github_service.events(current_user.nickname).third.each do |event| %>
-    <%= event[:message] %><br>
-  <% end %>
+<!-- user's followers feed -->
+<h2>User's Following's Feed:</h2>
+<% @github_service.following(current_user.nickname).each do |f| %>
+  <%= f[:login] %>
+  <% @github_service.events(f[:login]).first(3).each do |event| %>
+    <% event.each do |commit| %><br>
+      <%= commit[:message] %><br>
+    <% end %><br>
+    <% end %><br>
+<% end %>
 
 <!-- nav -->
 <div class="row">
