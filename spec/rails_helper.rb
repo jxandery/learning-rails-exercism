@@ -17,6 +17,10 @@ VCR.configure do |config|
   config.cassette_library_dir = "spec/fixtures/vcr_cassettes"
   config.hook_into :webmock
   config.default_cassette_options = { :serialize_with => :json }
+  config.preserve_exact_body_bytes do |http_message|
+    http_message.body.encoding.name == 'ASCII-8BIT' ||
+    !http_message.body.valid_encoding?
+  end
 
   config.before_record do |r|
     r.request.headers.delete("Authorization")
