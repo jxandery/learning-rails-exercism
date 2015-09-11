@@ -9,10 +9,11 @@
   <h2 class="home"> <%= current_user.email %></h2>
   <%= link_to "Logout", logout_path, method: :delete, class: "btn btn-lg btn-default btn-home" %>
 
-  <!-- user's repos -->
+  <!-- user's repos and pull requests -->
   <h2>Repos</h2>
   <% @github_service.repos(current_user.nickname).each do |repo| %>
-    <%= repo[:name] %><br>
+    <h3><%= repo[:name] %></h3>
+    <h4>  <%= @github_service.open_requests(current_user.nickname, repo[:name]).count %> Pull Requests Open</h4>
   <% end %>
 
   <!-- user's followers -->

@@ -38,6 +38,17 @@ class GithubService
     commits
   end
 
+  def open_requests(user, repo)
+    open = []
+    requests = parse(connection.get("/repos/#{user}/#{repo}/pulls?client_id=#{key}&client_secret=#{secret}"))
+    requests.each do |request|
+      if request[:state] == "open"
+        open << request[:title]
+      end
+    end
+    open
+  end
+
   private
 
   def parse(response)
