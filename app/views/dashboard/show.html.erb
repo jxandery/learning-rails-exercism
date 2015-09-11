@@ -58,7 +58,6 @@
 
 <!-- nav -->
 <!-- user -->
-<div class="row">
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header navbar-left">
@@ -71,7 +70,36 @@
     <%= link_to "Logout", logout_path, method: :delete, class: "btn btn-lg btn-default btn-home navbar-right" %>
     <%= image_tag current_user.image_url, class: "img-circle img-thumbnail home-image navbar-right" %>
   </nav><!-- /nav -->
-</div><!-- row -->
+
+  <div class="row"><!-- top level -->
+    <!-- COLUMN 1 -->
+    <div class="col-md-4 temp-col"><!-- col 1 -->
+
+  <div class="row temp-row"><!-- col 1: row 1 image -->
+    <p>Image</p>
+
+  </div><!-- /col 1: row 1 image -->
+
+  <div class="row temp-row"><!-- col 1: row 2 followers/ing -->
+    <p>Follower/ing</p>
+
+</div><!-- /col 1: row 2 followers/ing -->
+  </div><!-- /col 1 -->
+
+    <!-- COLUMN 2 -->
+    <div class="col-md-4 temp-col"><!-- col 2 -->
+  </div><!-- /col 2 -->
+
+    <!-- COLUMN 3 -->
+    <div class="col-md-4 temp-col"><!-- col 3 -->
+  </div><!-- /col 3 -->
+
+  <div class="row"><!-- col2: row 1 miscellaneous -->
+</div><!-- /col2: row 1 miscellaneous -->
+  <div class="row"><!-- col 2: row 2 feed -->
+</div><!-- /col 2: row 2 feed -->
+
+</div><!-- /top level row -->
 
 <div class="row">
   <div class="col-md-8 temp-col">
