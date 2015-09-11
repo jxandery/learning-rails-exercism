@@ -1,4 +1,4 @@
-<div class="container-fluid container-home">
+<div class="container container-home">
 <%#<div class="col-md-2"></div>%>
 <%#<div class="col-md-8">%>
 
@@ -7,7 +7,7 @@
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header navbar-left">
-        <h1 class="home navbar-left">Welcome <%= current_user.nickname %>!</h1>
+        <h1 class="home navbar">Welcome <%= current_user.nickname %>!</h1>
       </div>
       <div class="navbar-header navbar-center">
         <%= link_to 'Le Rails Ex', root_path, class: "navbar-brand navbar-center" %>
@@ -22,12 +22,11 @@
     <div class="col-md-4 temp-col"><!-- col 1 -->
 
       <div class="row temp-row"><!-- col 1: row 1 image -->
-        <p>Image</p>
-        <%= image_tag current_user.image_url, class: "img-center" %>
+        <%= image_tag current_user.image_url, class: "center-block" %>
+        <h4 class="text-center"><%= current_user.nickname %></h4>
       </div><!-- /col 1: row 1 image -->
 
       <div class="row temp-row"><!-- col 1: row 2 followers/ing -->
-        <p>Follower/ing</p>
         <div class="bs-component">
           <ul class="nav nav-tabs">
             <li class="active"><a href="#followers" data-toggle="tab">Followers</a></li>
@@ -35,10 +34,12 @@
           </ul>
           <div id="myTabContent" class="tab-content">
             <div class="tab-pane fade active in" id="followers">
-              <% @github_service.followers(current_user.nickname).each do |follower| %>
-                <%= image_tag follower[:avatar_url], class: "img-dashboard home-image " %>
-                <p><span class="mega-octicon octicon-mark-github"></span>     <%= follower[:login] %></p><br>
-              <% end %>
+              <div class="row">
+                <% @github_service.followers(current_user.nickname).each do |follower| %>
+                  <div class="col-sm-6"><%= image_tag follower[:avatar_url], class: "img-circle center-block img-dashboard home-image " %>
+                  <p class="text-center"><span class="mega-octicon octicon-mark-github"></span>     <%= follower[:login] %></p><br></div>
+                <% end %>
+              </div>
             </div>
             <div class="tab-pane fade" id="following">
               <% @github_service.following(current_user.nickname).each do |f| %>
@@ -57,9 +58,9 @@
 
       <!-- user's current, longest streak, total contributions -->
       <div class="row"><!-- col2: row 1 miscellaneous -->
-        <p>Miscellaneous</p>
         <div class="col-lg-4">
           <div class="bs-component">
+            <h4>Miscellaneous</h4>
             <ul class="list-group">
               <li class="list-group-item">
                 <span class="badge"><%= @github_service.starred(current_user.nickname).count %></span>
@@ -87,26 +88,26 @@
       </div><!-- /col2: row 1 miscellaneous -->
 
       <div class="row"><!-- col 2: row 2 feed -->
-        <p>Feeds</p>
         <div class="bs-component">
           <ul class="nav nav-tabs">
-            <li class="active"><a href="#user" data-toggle="tab">jxandery's feed</a></li>
-            <li><a href="#following_feed" data-toggle="tab">following's feed</a></li>
+            <li class="active"><a href="#user" data-toggle="tab"><%= current_user.nickname %>'s Feed</a></li>
+            <li><a href="#following_feed" data-toggle="tab">Following's Feed</a></li>
           </ul>
           <div id="myTabContent" class="tab-content">
             <div class="tab-pane fade active in" id="user">
               <% @github_service.events(current_user.nickname).first(3).each do |event| %>
                 <% event.each do |commit| %>
-                  <p><span class="octicon octicon-git-commit"></span>   <%= commit[:message] %></p>
+                  <p>       <span class="octicon octicon-git-commit"></span>   <%= commit[:message] %></p>
                 <% end %><br>
               <% end %>
             </div>
             <div class="tab-pane fade" id="following_feed">
               <% @github_service.following(current_user.nickname).each do |f| %>
-                <%= f[:login] %>
+                <%= image_tag f[:avatar_url], class: "img-feed home-image " %>
+                  <p class="text-center"><span class="mega-octicon octicon-mark-github"></span>     <%= f[:login] %></p><br></div>
                 <% @github_service.events(f[:login]).first(3).each do |event| %>
-                  <% event.each do |commit| %>
-                    <p><span class="octicon octicon-git-commit"></span>   <%= commit[:message] %></p>
+                  <% event.first(3).each do |commit| %>
+                    <p>        <span class="octicon octicon-git-commit"></span>   <%= commit[:message] %></p>
                   <% end %>
                 <% end %><br>
               <% end %>
@@ -118,14 +119,13 @@
 
     <!-- COLUMN 3 -->
     <div class="col-md-4 temp-col"><!-- col 3 -->
-      <p>Repos</p>
       <!-- user's repos and pull requests -->
       <div class="bs-component">
         <table class="table table-striped table-hover ">
           <thead>
             <tr>
               <th>Repo Name</th>
-              <th>Pull Requests Open</th>
+              <th>Requests</th>
             </tr>
           </thead>
           <% @github_service.repos(current_user.nickname).each do |repo| %>
@@ -144,4 +144,4 @@
     </div><!-- /top level row -->
 
     <%#<div class="col-md-2"></div>%>
-  </div><!-- /.container-fluid -->
+  </div><!-- /.container -->
