@@ -143,7 +143,7 @@
           <% @github_service.repos(current_user.nickname).each do |repo| %>
             <tbody>
               <tr>
-                <td><span class="octicon octicon-repo"></span>    <%= repo[:name] %></td>
+                <td><span class="octicon octicon-repo"></span>    <%= link_to repo[:name], "http://github.com/#{current_user.nickname}/#{repo[:name]}" %></td>
                 <td><%= "#{@github_service.open_requests(current_user.nickname, repo[:name]).count}" %></td>
               </tr>
             </tbody>
