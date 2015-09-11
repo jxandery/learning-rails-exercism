@@ -2,13 +2,6 @@
 <div class="col-md-2"></div>
 <div class="col-md-8">
 
-  <!-- user's repos and pull requests -->
-  <h2>Repos</h2>
-  <% @github_service.repos(current_user.nickname).each do |repo| %>
-    <h3><%= repo[:name] %></h3>
-    <h4>  <%= @github_service.open_requests(current_user.nickname, repo[:name]).count %> Pull Requests Open</h4>
-  <% end %>
-
   <!-- user's followers -->
   <h2>Followers</h2>
   <% @github_service.followers(current_user.nickname).each do |follower| %>
@@ -58,60 +51,78 @@
 
 <!-- nav -->
 <!-- user -->
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header navbar-left">
-        <h1 class="home navbar-left">Welcome <%= current_user.nickname %>!</h1>
-      </div>
-      <div class="navbar-header navbar-center">
-        <%= link_to 'Le Rails Ex', root_path, class: "navbar-brand navbar-center" %>
-      </div>
-    </div><!-- /.navbar-collapse -->
-    <%= link_to "Logout", logout_path, method: :delete, class: "btn btn-lg btn-default btn-home navbar-right" %>
-    <%= image_tag current_user.image_url, class: "img-circle img-thumbnail home-image navbar-right" %>
-  </nav><!-- /nav -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header navbar-left">
+      <h1 class="home navbar-left">Welcome <%= current_user.nickname %>!</h1>
+    </div>
+    <div class="navbar-header navbar-center">
+      <%= link_to 'Le Rails Ex', root_path, class: "navbar-brand navbar-center" %>
+    </div>
+  </div><!-- /.navbar-collapse -->
+  <%= link_to "Logout", logout_path, method: :delete, class: "btn btn-lg btn-default btn-home navbar-right" %>
+  <%= image_tag current_user.image_url, class: "img-circle img-thumbnail home-image navbar-right" %>
+</nav><!-- /nav -->
 
-  <div class="row"><!-- top level -->
-    <!-- COLUMN 1 -->
-    <div class="col-md-4 temp-col"><!-- col 1 -->
+<div class="row"><!-- top level -->
+  <!-- COLUMN 1 -->
+  <div class="col-md-4 temp-col"><!-- col 1 -->
 
-  <div class="row temp-row"><!-- col 1: row 1 image -->
-    <p>Image</p>
+    <div class="row temp-row"><!-- col 1: row 1 image -->
+      <p>Image</p>
 
-  </div><!-- /col 1: row 1 image -->
+    </div><!-- /col 1: row 1 image -->
 
-  <div class="row temp-row"><!-- col 1: row 2 followers/ing -->
-    <p>Follower/ing</p>
+    <div class="row temp-row"><!-- col 1: row 2 followers/ing -->
+      <p>Follower/ing</p>
 
-</div><!-- /col 1: row 2 followers/ing -->
+    </div><!-- /col 1: row 2 followers/ing -->
   </div><!-- /col 1 -->
 
-    <!-- COLUMN 2 -->
-    <div class="col-md-4 temp-col"><!-- col 2 -->
+  <!-- COLUMN 2 -->
+  <div class="col-md-4 temp-col"><!-- col 2 -->
+
+    <div class="row"><!-- col2: row 1 miscellaneous -->
+      <p>Miscellaneous</p>
+      <div class="col-lg-4">
+        <div class="bs-component">
+          <ul class="list-group">
+            <li class="list-group-item">
+              <span class="badge">14</span>
+              Cras justo odio
+            </li>
+            <li class="list-group-item">
+              <span class="badge">2</span>
+              Dapibus ac facilisis in
+            </li>
+            <li class="list-group-item">
+              <span class="badge">1</span>
+              Morbi leo risus
+            </li>
+          </ul>
+          <div id="source-button" class="btn btn-primary btn-xs" style="display: none;">&lt; &gt;</div></div>
+      </div>
+    </div><!-- /col2: row 1 miscellaneous -->
+    <div class="row"><!-- col 2: row 2 feed -->
+      <p>Feed</p>
+    </div><!-- /col 2: row 2 feed -->
   </div><!-- /col 2 -->
 
-    <!-- COLUMN 3 -->
-    <div class="col-md-4 temp-col"><!-- col 3 -->
+  <!-- COLUMN 3 -->
+  <div class="col-md-4 temp-col"><!-- col 3 -->
+    <p>Repos</p>
+
+    <!-- user's repos and pull requests -->
+    <h2>Repos</h2>
+    <% @github_service.repos(current_user.nickname).each do |repo| %>
+      <h3><%= repo[:name] %></h3>
+      <h4>  <%= @github_service.open_requests(current_user.nickname, repo[:name]).count %> Pull Requests Open</h4>
+    <% end %>
+
   </div><!-- /col 3 -->
 
-  <div class="row"><!-- col2: row 1 miscellaneous -->
-</div><!-- /col2: row 1 miscellaneous -->
-  <div class="row"><!-- col 2: row 2 feed -->
-</div><!-- /col 2: row 2 feed -->
 
 </div><!-- /top level row -->
 
-<div class="row">
-  <div class="col-md-8 temp-col">
-    <p>feed</p>
-  </div>
-
-  <!-- repos -->
-  <div class="col-md-4 temp-col">
-    <p>repos</p>
-  </div>
-</div><!-- row -->
-
-</div>
 <div class="col-md-2"></div>
 </div><!-- /.container-fluid -->
