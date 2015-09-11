@@ -26,14 +26,14 @@
 
   </nav><!-- /nav -->
 
-      <h1 class="welcome">Welcome <%= current_user.nickname %>!</h1>
+      <h1 class="welcome">Welcome <%= link_to current_user.nickname, dashboard_path %>!</h1>
   <div class="row"><!-- top level -->
     <!-- COLUMN 1 -->
     <div class="col-md-4 temp-col"><!-- col 1 -->
       <br>
       <div class="row temp-row"><!-- col 1: row 1 image -->
         <%= image_tag current_user.image_url, class: "center-block" %>
-        <h4 class="text-center"><%= current_user.nickname %></h4><br><br>
+        <h4 class="text-center"><%= link_to current_user.nickname, dashboard_path %></h4><br><br>
       </div><!-- /col 1: row 1 image -->
 
       <div class="row temp-row"><!-- col 1: row 2 followers/ing -->
@@ -75,19 +75,19 @@
             <ul class="list-group">
               <li class="list-group-item">
                 <span class="badge"><%= @github_service.starred(current_user.nickname).count %></span>
-                <span class="octicon octicon-star"></span>   Starred Repos
+                <span class="octicon octicon-star"></span>   <%= link_to "Starred Repos", "https://github.com/stars" %>
               </li>
               <li class="list-group-item">
                 <span class="badge"><%= @stats.current_streak %></span>
-                <span class="octicon octicon-git-commit"></span>   Current Streak
+                <span class="octicon octicon-git-commit"></span>   <%= link_to "Current Streak", "https://github.com/#{current_user.nickname}" %>
               </li>
               <li class="list-group-item">
                 <span class="badge"><%= @stats.max_streak %></span>
-                <span class="octicon octicon-git-commit"></span>   Longest Streak
+                <span class="octicon octicon-git-commit"></span>   <%= link_to "Longest Streak", "https://github.com/#{current_user.nickname}" %>
               </li>
               <li class="list-group-item">
                 <span class="badge"><%= @stats.commit_activity %></span>
-                <span class="octicon octicon-git-commit"></span>   Contributions last year
+                <span class="octicon octicon-git-commit"></span>   <%= link_to "Contributions last year", "https://github.com/#{current_user.nickname}" %>
               </li>
               <li class="list-group-item">
                 <span class="badge"><% @github_service.orgs(current_user.nickname).count %></span>
@@ -136,8 +136,8 @@
         <table class="table table-striped table-hover ">
           <thead>
             <tr>
-              <th>Repo Name</th>
-              <th>Requests</th>
+              <th><%= link_to "Repositories", "https://github.com/#{current_user.nickname}/repositories/"%></th>
+              <th><%= link_to "Requests", "https://github.com/pulls" %></th>
             </tr>
           </thead>
           <% @github_service.repos(current_user.nickname).each do |repo| %>
