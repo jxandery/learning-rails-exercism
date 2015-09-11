@@ -21,8 +21,6 @@
     <%= f[:login] %><br>
   <% end %>
 </div>
-<div class="col-md-2"></div>
-</div>
 
 <!-- user's following -->
 <h2>Organizations</h2>
@@ -72,8 +70,8 @@
     </div><!-- /.navbar-collapse -->
     <%= link_to "Logout", logout_path, method: :delete, class: "btn btn-lg btn-default btn-home navbar-right" %>
     <%= image_tag current_user.image_url, class: "img-circle img-thumbnail home-image navbar-right" %>
-  </nav>
-</div><!-- /nav -->
+  </nav><!-- /nav -->
+</div><!-- row -->
 
 <div class="row">
   <div class="col-md-8 temp-col">
@@ -84,5 +82,8 @@
   <div class="col-md-4 temp-col">
     <p>repos</p>
   </div>
+</div><!-- row -->
+
 </div>
+<div class="col-md-2"></div>
 </div><!-- /.container-fluid -->
