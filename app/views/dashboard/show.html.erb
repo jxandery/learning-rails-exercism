@@ -23,113 +23,125 @@
 
       <div class="row temp-row"><!-- col 1: row 1 image -->
         <p>Image</p>
-        <%= image_tag current_user.image_url, class: "img-circle img-thumbnail home-image navbar-right" %>
+        <%= image_tag current_user.image_url, class: "img-center" %>
       </div><!-- /col 1: row 1 image -->
 
       <div class="row temp-row"><!-- col 1: row 2 followers/ing -->
         <p>Follower/ing</p>
-      <div class="bs-component">
-        <ul class="nav nav-tabs">
-          <li class="active"><a href="#followers" data-toggle="tab">Followers</a></li>
-          <li><a href="#following" data-toggle="tab">Following</a></li>
-        </ul>
-        <div id="myTabContent" class="tab-content">
-          <div class="tab-pane fade active in" id="followers">
-            <% @github_service.followers(current_user.nickname).each do |follower| %>
-              <%= follower[:login] %><br>
-            <% end %>
-          </div>
-          <div class="tab-pane fade" id="following">
-            <% @github_service.following(current_user.nickname).each do |f| %>
-              <%= f[:login] %><br>
-            <% end %>
-          </div>
-        </div>
-      </div><!-- /bs-component -->
-
-    </div><!-- /col 1: row 2 followers/ing -->
-  </div><!-- /col 1 -->
-
-<!-- COLUMN 2 -->
-<div class="col-md-4 temp-col"><!-- col 2 -->
-
-
-  <!-- user's current, longest streak, total contributions -->
-  <div class="row"><!-- col2: row 1 miscellaneous -->
-    <p>Miscellaneous</p>
-    <div class="col-lg-4">
-      <div class="bs-component">
-        <ul class="list-group">
-          <li class="list-group-item">
-            <span class="badge"><%= @github_service.starred(current_user.nickname).count %></span>
-            Starred Repos
-          </li>
-          <li class="list-group-item">
-            <span class="badge"><%= @stats.current_streak %></span>
-            Current Streak
-          </li>
-          <li class="list-group-item">
-            <span class="badge"><%= @stats.max_streak %></span>
-            Longest Streak
-          </li>
-          <li class="list-group-item">
-            <span class="badge"><%= @stats.commit_activity %></span>
-            Contributions last year
-          </li>
-          <li class="list-group-item">
-            <span class="badge"><% @github_service.orgs(current_user.nickname).count %></span>
-            Organizations
-          </li>
-        </ul>
-      </div><!-- /bs-component -->
-    </div><!-- /col-lg-4 -->
-  </div><!-- /col2: row 1 miscellaneous -->
-
-  <div class="row"><!-- col 2: row 2 feed -->
-    <p>Feed</p>
-    <div class="bs-component">
-      <ul class="nav nav-tabs">
-        <li class="active"><a href="#user" data-toggle="tab">User</a></li>
-        <li><a href="#following" data-toggle="tab">Following</a></li>
-      </ul>
-      <div id="myTabContent" class="tab-content">
-        <div class="tab-pane fade active in" id="user">
-          <% @github_service.events(current_user.nickname).first(3).each do |event| %>
-            <% event.each do |commit| %>
-              <p><%= commit[:message] %></p>
-            <% end %><br>
-          <% end %>
-        </div>
-        <div class="tab-pane fade" id="following">
-          <% @github_service.following(current_user.nickname).each do |f| %>
-            <%= f[:login] %>
-            <% @github_service.events(f[:login]).first(3).each do |event| %>
-              <% event.each do |commit| %>
-                <p><%= commit[:message] %></p>
+        <div class="bs-component">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#followers" data-toggle="tab">Followers</a></li>
+            <li><a href="#following" data-toggle="tab">Following</a></li>
+          </ul>
+          <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="followers">
+              <% @github_service.followers(current_user.nickname).each do |follower| %>
+    <%= image_tag follower[:avatar_url], class: "img-circle img-thumbnail home-image " %>
+                <%= follower[:login] %><br>
               <% end %>
-            <% end %><br>
+            </div>
+            <div class="tab-pane fade" id="following">
+              <% @github_service.following(current_user.nickname).each do |f| %>
+                <%= f[:login] %><br>
+              <% end %>
+            </div>
+          </div>
+        </div><!-- /bs-component -->
+
+      </div><!-- /col 1: row 2 followers/ing -->
+    </div><!-- /col 1 -->
+
+    <!-- COLUMN 2 -->
+    <div class="col-md-4 temp-col"><!-- col 2 -->
+
+
+      <!-- user's current, longest streak, total contributions -->
+      <div class="row"><!-- col2: row 1 miscellaneous -->
+        <p>Miscellaneous</p>
+        <div class="col-lg-4">
+          <div class="bs-component">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <span class="badge"><%= @github_service.starred(current_user.nickname).count %></span>
+                Starred Repos
+              </li>
+              <li class="list-group-item">
+                <span class="badge"><%= @stats.current_streak %></span>
+                Current Streak
+              </li>
+              <li class="list-group-item">
+                <span class="badge"><%= @stats.max_streak %></span>
+                Longest Streak
+              </li>
+              <li class="list-group-item">
+                <span class="badge"><%= @stats.commit_activity %></span>
+                Contributions last year
+              </li>
+              <li class="list-group-item">
+                <span class="badge"><% @github_service.orgs(current_user.nickname).count %></span>
+                Organizations
+              </li>
+            </ul>
+          </div><!-- /bs-component -->
+        </div><!-- /col-lg-4 -->
+      </div><!-- /col2: row 1 miscellaneous -->
+
+      <div class="row"><!-- col 2: row 2 feed -->
+        <p>Feeds</p>
+        <div class="bs-component">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#user" data-toggle="tab">jxandery's feed</a></li>
+            <li><a href="#following_feed" data-toggle="tab">following's feed</a></li>
+          </ul>
+          <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="user">
+              <% @github_service.events(current_user.nickname).first(3).each do |event| %>
+                <% event.each do |commit| %>
+                  <p><%= commit[:message] %></p>
+                <% end %><br>
+              <% end %>
+            </div>
+            <div class="tab-pane fade" id="following_feed">
+              <% @github_service.following(current_user.nickname).each do |f| %>
+                <%= f[:login] %>
+                <% @github_service.events(f[:login]).first(3).each do |event| %>
+                  <% event.each do |commit| %>
+                    <p><%= commit[:message] %></p>
+                  <% end %>
+                <% end %><br>
+              <% end %>
+            </div>
+          </div>
+        </div><!-- /bs-component -->
+      </div><!-- /col 2: row 2 feed -->
+    </div><!-- /col 2 -->
+
+    <!-- COLUMN 3 -->
+    <div class="col-md-4 temp-col"><!-- col 3 -->
+      <p>Repos</p>
+      <!-- user's repos and pull requests -->
+      <div class="bs-component">
+        <table class="table table-striped table-hover ">
+          <thead>
+            <tr>
+              <th>Repo Name</th>
+              <th>Pull Requests Open</th>
+            </tr>
+          </thead>
+          <% @github_service.repos(current_user.nickname).each do |repo| %>
+            <tbody>
+              <tr>
+                <td><span class="octicon octicon-repo"><%= repo[:name] %></span></td>
+                <td><%= "#{@github_service.open_requests(current_user.nickname, repo[:name]).count}" %></td>
+              </tr>
+            </tbody>
           <% end %>
-        </div>
-      </div>
-    </div><!-- /bs-component -->
-  </div><!-- /col 2: row 2 feed -->
-</div><!-- /col 2 -->
+        </table>
 
-<!-- COLUMN 3 -->
-<div class="col-md-4 temp-col"><!-- col 3 -->
-  <p>Repos</p>
-
-  <!-- user's repos and pull requests -->
-  <h2>Repos</h2>
-  <% @github_service.repos(current_user.nickname).each do |repo| %>
-    <h3><%= repo[:name] %></h3>
-    <h4>  <%= @github_service.open_requests(current_user.nickname, repo[:name]).count %> Pull Requests Open</h4>
-  <% end %>
-
-</div><!-- /col 3 -->
+      </div><!-- /col 3 -->
 
 
-</div><!-- /top level row -->
+    </div><!-- /top level row -->
 
-<%#<div class="col-md-2"></div>%>
-</div><!-- /.container-fluid -->
+    <%#<div class="col-md-2"></div>%>
+  </div><!-- /.container-fluid -->
