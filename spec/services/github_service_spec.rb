@@ -53,11 +53,12 @@ RSpec.describe 'gitservice works' do
     end
   end
 
-  it 'gets last year of commit activity' do
-    VCR.use_cassette('github_service#commit_activity') do
+  it 'gets commit events' do
+    VCR.use_cassette('github_service#events') do
       service = GithubService.new
-      results = service.orgs('jxandery')
+      results = service.events('jxandery')
 
+      expect(results.first.first[:message]).to eq('add functionality: displays open pull requests')
     end
   end
 end
