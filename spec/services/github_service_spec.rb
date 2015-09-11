@@ -61,4 +61,13 @@ RSpec.describe 'gitservice works' do
       expect(results.first.first[:message]).to eq('add functionality: displays open pull requests')
     end
   end
+
+  it 'gets open pull requests' do
+    VCR.use_cassette('github_service#pull_requests') do
+      service = GithubService.new
+      results = service.open_requests('jxandery', 'learning-rails-exercism')
+
+      expect(results.count).to eq(1)
+    end
+  end
 end
