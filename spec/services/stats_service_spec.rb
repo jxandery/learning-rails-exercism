@@ -10,14 +10,6 @@ RSpec.describe 'gitservice works' do
     end
   end
 
-  it 'gets current streak' do
-    VCR.use_cassette('stats#current_streak') do
-      stats = StatsService.new('jxandery')
-
-      expect(stats.current_streak).to eq(4)
-    end
-  end
-
   it 'gets commit activity' do
     VCR.use_cassette('stats#commit_activity') do
       stats = StatsService.new('jxandery')

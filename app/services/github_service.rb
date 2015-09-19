@@ -53,6 +53,10 @@ class GithubService
     GithubStats.new(user)
   end
 
+  def current_streak(user)
+    stats(user).streak.count
+  end
+
   private
 
   def parse(response)

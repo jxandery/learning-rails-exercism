@@ -11,10 +11,6 @@ class StatsService
     stats.longest_streak.count
   end
 
-  def current_streak
-    stats.streak.count
-  end
-
   def commit_activity
     stats.scores.reduce(:+)
   end

@@ -70,4 +70,14 @@ RSpec.describe 'gitservice works' do
       expect(results.count).to eq(1)
     end
   end
+
+  it 'gets current streak' do
+    VCR.use_cassette('stats#current_streak') do
+      service = GithubService.new
+      results = service.current_streak('jxandery')
+
+      expect(results).to eq(4)
+    end
+  end
+
 end
