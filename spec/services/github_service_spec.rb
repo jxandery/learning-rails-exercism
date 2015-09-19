@@ -72,7 +72,16 @@ RSpec.describe 'gitservice works' do
   end
 
   it 'gets current streak' do
-    VCR.use_cassette('stats#current_streak') do
+    VCR.use_cassette('github_service#current_streak') do
+      service = GithubService.new
+      results = service.current_streak('jxandery')
+
+      expect(results).to eq(4)
+    end
+  end
+
+  it 'gets max streak' do
+    VCR.use_cassette('github_service#max_streak') do
       service = GithubService.new
       results = service.current_streak('jxandery')
 
