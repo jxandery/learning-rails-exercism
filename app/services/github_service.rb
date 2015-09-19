@@ -49,6 +49,10 @@ class GithubService
     open
   end
 
+  def stats(user)
+    GithubStats.new(user)
+  end
+
   private
 
   def parse(response)
