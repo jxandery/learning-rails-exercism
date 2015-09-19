@@ -22,6 +22,7 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'pry'
   gem 'simplecov'
+  gem 'launchy'
   #gem 'spring'
 end
 

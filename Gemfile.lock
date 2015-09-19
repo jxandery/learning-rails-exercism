@@ -96,6 +96,8 @@ GEM
       thor (>= 0.14, < 2.0)
     json (1.8.3)
     jwt (1.5.1)
+    launchy (2.4.3)
+      addressable (~> 2.3)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.3)
@@ -230,6 +232,7 @@ DEPENDENCIES
   hurley
   jbuilder (~> 2.0)
   jquery-rails
+  launchy
   omniauth-github (~> 1.1.2)
   pg (~> 0.18.3)
   pry
