@@ -61,6 +61,10 @@ class GithubService
     stats(user).longest_streak.count
   end
 
+  def commit_activity(user)
+    stats(user).scores.reduce(:+)
+  end
+
   private
 
   def parse(response)

@@ -7,7 +7,4 @@ class StatsService
     @stats = GithubStats.new(user)
   end
 
-  def commit_activity
-    stats.scores.reduce(:+)
-  end
 end

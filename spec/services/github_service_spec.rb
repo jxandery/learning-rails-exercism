@@ -76,17 +76,25 @@ RSpec.describe 'gitservice works' do
       service = GithubService.new
       results = service.current_streak('jxandery')
 
-      expect(results).to eq(4)
+      expect(results).to eq(0)
     end
   end
 
   it 'gets max streak' do
     VCR.use_cassette('github_service#max_streak') do
       service = GithubService.new
-      results = service.current_streak('jxandery')
+      results = service.max_streak('jxandery')
 
-      expect(results).to eq(4)
+      expect(results).to eq(20)
     end
   end
 
+  it 'gets commit activity' do
+    VCR.use_cassette('github_service#commit_activity') do
+      service = GithubService.new
+      results = service.commit_activity('jxandery')
+
+      expect(results).to eq(1423)
+    end
+  end
 end
