@@ -82,11 +82,11 @@
                 <span class="octicon octicon-git-commit"></span>   <%= link_to "Current Streak", "https://github.com/#{current_user.nickname}" %>
               </li>
               <li class="list-group-item">
-                <span class="badge"><%= @github_service.max_streak %></span>
+                <span class="badge"><%= @github_service.max_streak(current_user) %></span>
                 <span class="octicon octicon-git-commit"></span>   <%= link_to "Longest Streak", "https://github.com/#{current_user.nickname}" %>
               </li>
               <li class="list-group-item">
-                <span class="badge"><%= @github_hub.commit_activity %></span>
+                <span class="badge"><%= @github_service.commit_activity(current_user) %></span>
                 <span class="octicon octicon-git-commit"></span>   <%= link_to "Contributions last year", "https://github.com/#{current_user.nickname}" %>
               </li>
               <li class="list-group-item">
