@@ -1,42 +1,65 @@
 <div class="container container-home">
-<%#<div class="col-md-2"></div>%>
-<%#<div class="col-md-8">%>
 
-  <!-- nav -->
-  <!-- user -->
-  <nav class="navbar navbar-default">
+<!-- nav -->
+<!-- user -->
+<nav class="navbar navbar-default">
 
-    <div class="container-fluid nav-container">
+  <div class="container-fluid nav-container">
 
-      <!-- <div class="navbar-header navbar-left"> -->
-      <!-- <h1 class="home navbar">Welcome <%= current_user.nickname %>!</h1> -->
-      <!-- </div> -->
+    <%= current_user.nickname %>
 
-      <%= link_to 'Le Rails Ex', root_path, class: "home-link navbar-brand" %>
+    <%= link_to 'Le Rails Ex', root_path, class: "home-link navbar-brand" %>
 
+    <%= link_to "Logout", logout_path, method: :delete, class: "btn btn-default btn-home navbar-btn navbar-right" %>
+    <%= image_tag current_user.image_url, class: "img-circle img-thumbnail home-image navbar-right" %>
+  </div><!-- /.navbar-collapse -->
 
-      <!-- <div class="navbar-header navbar-center"> -->
-      <!-- <%= link_to 'Le Rails Ex', root_path, class: "navbar-brand navbar-center" %> -->
-      <!-- </div> -->
+</nav><!-- /nav -->
 
-      <%= link_to "Logout", logout_path, method: :delete, class: "btn btn-default btn-home navbar-btn navbar-right" %>
-      <%= image_tag current_user.image_url, class: "img-circle img-thumbnail home-image navbar-right" %>
-    </div><!-- /.navbar-collapse -->
+<div class="row"><!-- top level -->
+  <!-- COLUMN 1 has 2 rows and 2 columns inside each row -->
+  <div class="col-md-8 temp-col"><!-- col 1 -->
+    <div class="row"><!-- column 1 row 1-->
 
-
-  </nav><!-- /nav -->
-
-      <h1 class="welcome">Welcome <%= link_to current_user.nickname, dashboard_path %>!</h1>
-  <div class="row"><!-- top level -->
-    <!-- COLUMN 1 -->
-    <div class="col-md-4 temp-col"><!-- col 1 -->
-      <br>
-      <div class="row temp-row"><!-- col 1: row 1 image -->
+      <div class="col-md-4 temp-col"><!-- col 1 row 1 col 1 image -->
+        <br><br><br>
         <%= image_tag current_user.image_url, class: "center-block img-rounded" %>
         <h4 class="text-center"><%= link_to current_user.nickname, dashboard_path %></h4><br><br>
-      </div><!-- /col 1: row 1 image -->
+      </div><!-- /col 1 row 1 col 1 -->
 
-      <div class="row temp-row"><!-- col 1: row 2 followers/ing -->
+      <div class="col-md-5 temp-col"><!-- col 1 row 1 col 2 miscellaneous-->
+        <div class="bs-component">
+          <h4>Miscellaneous</h4>
+          <ul class="list-group">
+            <li class="list-group-item">
+              <span class="badge"><%= @github_service.starred(current_user.nickname).count %></span>
+              <span class="octicon octicon-star"></span>   <%= link_to "Starred Repos", "https://github.com/stars" %>
+          </li>
+          <li class="list-group-item">
+            <span class="badge"><%= @github_service.current_streak(current_user) %></span>
+            <span class="octicon octicon-git-commit"></span>   <%= link_to "Current Streak", "https://github.com/#{current_user.nickname}" %>
+        </li>
+        <li class="list-group-item">
+          <span class="badge"><%= @github_service.max_streak(current_user) %></span>
+          <span class="octicon octicon-git-commit"></span>   <%= link_to "Longest Streak", "https://github.com/#{current_user.nickname}" %>
+      </li>
+      <li class="list-group-item">
+        <span class="badge"><%= @github_service.commit_activity(current_user) %></span>
+        <span class="octicon octicon-git-commit"></span>   <%= link_to "Contributions last year", "https://github.com/#{current_user.nickname}" %>
+    </li>
+    <li class="list-group-item">
+      <span class="badge"><% @github_service.orgs(current_user.nickname).count %></span>
+      <span class="octicon octicon-organization"></span>   Organizations
+    </li>
+          </ul>
+        </div><!-- /bs-component -->
+      </div><!-- /col 1 row 1 col 2 -->
+
+    </div><!-- /column 1 row 1 -->
+
+    <div class="row"><!-- column 1 row 2-->
+
+      <div class="col-md-4 temp-col"><!-- col 1 row 2 col 1 followers/ing -->
         <div class="bs-component">
           <ul class="nav nav-tabs">
             <li class="active"><a href="#followers" data-toggle="tab">Followers</a></li>
@@ -59,46 +82,9 @@
             </div>
           </div>
         </div><!-- /bs-component -->
+      </div><!-- /col 1 row 1 col 2 -->
 
-      </div><!-- /col 1: row 2 followers/ing -->
-    </div><!-- /col 1 -->
-
-    <!-- COLUMN 2 -->
-    <div class="col-md-4 temp-col"><!-- col 2 -->
-
-
-      <!-- user's current, longest streak, total contributions -->
-      <div class="row"><!-- col2: row 1 miscellaneous -->
-        <div class="col-lg-4">
-          <div class="bs-component">
-            <h4>Miscellaneous</h4>
-            <ul class="list-group">
-              <li class="list-group-item">
-                <span class="badge"><%= @github_service.starred(current_user.nickname).count %></span>
-                <span class="octicon octicon-star"></span>   <%= link_to "Starred Repos", "https://github.com/stars" %>
-              </li>
-              <li class="list-group-item">
-                <span class="badge"><%= @github_service.current_streak(current_user) %></span>
-                <span class="octicon octicon-git-commit"></span>   <%= link_to "Current Streak", "https://github.com/#{current_user.nickname}" %>
-              </li>
-              <li class="list-group-item">
-                <span class="badge"><%= @github_service.max_streak(current_user) %></span>
-                <span class="octicon octicon-git-commit"></span>   <%= link_to "Longest Streak", "https://github.com/#{current_user.nickname}" %>
-              </li>
-              <li class="list-group-item">
-                <span class="badge"><%= @github_service.commit_activity(current_user) %></span>
-                <span class="octicon octicon-git-commit"></span>   <%= link_to "Contributions last year", "https://github.com/#{current_user.nickname}" %>
-              </li>
-              <li class="list-group-item">
-                <span class="badge"><% @github_service.orgs(current_user.nickname).count %></span>
-                <span class="octicon octicon-organization"></span>   Organizations
-              </li>
-            </ul>
-          </div><!-- /bs-component -->
-        </div><!-- /col-lg-4 -->
-      </div><!-- /col2: row 1 miscellaneous -->
-      <br>
-      <div class="row"><!-- col 2: row 2 feed -->
+      <div class="col-md-5 temp-col"><!-- col 1 row 2 col 2 feed -->
         <div class="bs-component">
           <ul class="nav nav-tabs">
             <li class="active"><a href="#user" data-toggle="tab"><%= current_user.nickname %>'s Feed</a></li>
@@ -126,34 +112,38 @@
             </div>
           </div>
         </div><!-- /bs-component -->
-      </div><!-- /col 2: row 2 feed -->
-    </div><!-- /col 2 -->
+      </div><!-- /col 1 row 1 col 2 -->
 
-    <!-- COLUMN 3 -->
-    <div class="col-md-4 temp-col"><!-- col 3 -->
-      <!-- user's repos and pull requests -->
-      <div class="bs-component">
-        <table class="table table-striped table-hover ">
-          <thead>
+    </div><!-- /column 1 row 2 -->
+
+  </div><!-- /col 1 -->
+
+  <!-- COLUMN 2 repo info -->
+
+  <div class="col-md-3 temp-col"><!-- col 2 -->
+    <!-- user's repos and pull requests -->
+    <div class="bs-component">
+      <table class="table table-striped table-hover ">
+        <thead>
+          <tr>
+            <th><%= link_to "Repositories", "https://github.com/#{current_user.nickname}/repositories/"%></th>
+            <th><%= link_to "Requests", "https://github.com/pulls" %></th>
+          </tr>
+        </thead>
+        <% @github_service.repos(current_user.nickname).each do |repo| %>
+          <tbody>
             <tr>
-              <th><%= link_to "Repositories", "https://github.com/#{current_user.nickname}/repositories/"%></th>
-              <th><%= link_to "Requests", "https://github.com/pulls" %></th>
+              <td><span class="octicon octicon-repo"></span>    <%= link_to repo[:name], "http://github.com/#{current_user.nickname}/#{repo[:name]}" %></td>
+              <td><%= "#{@github_service.open_requests(current_user.nickname, repo[:name]).count}" %></td>
             </tr>
-          </thead>
-          <% @github_service.repos(current_user.nickname).each do |repo| %>
-            <tbody>
-              <tr>
-                <td><span class="octicon octicon-repo"></span>    <%= link_to repo[:name], "http://github.com/#{current_user.nickname}/#{repo[:name]}" %></td>
-                <td><%= "#{@github_service.open_requests(current_user.nickname, repo[:name]).count}" %></td>
-              </tr>
-            </tbody>
-          <% end %>
-        </table>
+          </tbody>
+        <% end %>
+      </table>
 
-      </div><!-- /col 3 -->
+    </div><!-- /bs-component -->
 
+  </div><!-- /col 2 -->
 
-    </div><!-- /top level row -->
+</div><!-- /top level row -->
 
-    <%#<div class="col-md-2"></div>%>
-  </div><!-- /.container -->
+</div><!-- /.container -->
